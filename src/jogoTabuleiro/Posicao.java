@@ -28,6 +28,7 @@ public class Posicao {
 	
 	@Override
 	public String toString() {
+		//Imprimi a posição da peça na tela 
 		return linha + ", " + coluna;
 	}
 	

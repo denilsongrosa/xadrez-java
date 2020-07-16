@@ -4,6 +4,9 @@ import xadrez.PecaXadrez;
 
 public class UI {
 	
+	//Classe utilizada para imprimir peças e tabuleiro
+	
+	
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {
 		for(int i =0; i<pecas.length; i++) {
 			System.out.print((8-i) + " ");
@@ -17,9 +20,9 @@ public class UI {
 	
 	private static void imprimirPeca(PecaXadrez peca) {
 		if (peca == null) {
-			System.out.print("-");
+			System.out.print("-"); //impressão caso não tenha peça na posição atual
 		}else {
-			System.out.print(peca);
+			System.out.print(peca); //imprimi a peça caso tenha alguma na posição
 		}
 		System.out.print(" ");
 	}
