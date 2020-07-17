@@ -30,12 +30,18 @@ public class PartidaXadrez {
 		return mtz; //retorna a matriz de peças da partida de xadrez
 	}
 	
+	//Método abaixo coloca uma peça na posição da matriz, recebendo a peça na posição do xadrez
+	private void lugarNovaPeca(char coluna, int linha, PecaXadrez peca) {
+		this.tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).getPosicaoMtz());
+	}
+	
+	
 	//método responsável por iniciar a partida de xadrez colocando as peças no tabuleiro
 	private void setupInicial() {
 		//Colocando a peça Torre da cor branca na posição 2,1
-		tabuleiro.lugarPeca(new Torre(tabuleiro, Cor.WHITE), new Posicao(2, 1));
-		tabuleiro.lugarPeca(  new Rei(tabuleiro, Cor.BLACK), new Posicao(0, 4));
-		tabuleiro.lugarPeca(  new Rei(tabuleiro, Cor.WHITE), new Posicao(7, 4));
+		lugarNovaPeca('b', 6, new Torre(tabuleiro, Cor.WHITE));
+		lugarNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
+		lugarNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
 		
 	}
 	
