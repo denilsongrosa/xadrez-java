@@ -38,12 +38,15 @@ public class PosicaoXadrez {
 	  a b c d e f g h
 	*/
 	//Assim para o método abaixo, dada uma posição do xadrez, ele retorna uma posição da matriz
-	protected Posicao getPosicaoMtz() {
+	//Classe origem: toPosition
+	protected Posicao paraPosicaoMtz() {
 		return new Posicao(8 - this.linha, this.coluna - 'a');		
 	}
 	
+	
 	//O método abaixo faz o inverso do método anterior, dada uma posição de matriz, ele retorna uma posição do xadrez
-	protected static PosicaoXadrez  getPosicaoXadrez(Posicao posicao) {
+	//Classe origem: fromPosition 
+	protected static PosicaoXadrez  daPosicaoXadrez(Posicao posicao) {
 		//No xadrez primeiro se fala a coluna depois se fala a linha
 		return new PosicaoXadrez((char)('a' - posicao.getColuna()), 8 - posicao.getLinha());
 	}

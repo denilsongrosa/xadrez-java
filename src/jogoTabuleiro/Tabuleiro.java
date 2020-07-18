@@ -48,6 +48,21 @@ public class Tabuleiro {
 		peca.posicao = posicao; //atualiza a posicao da peca, na classe peca
 	}
 	
+	public Peca removePeca(Posicao posicao) {
+		if(!posicaoExistente(posicao)) {
+			throw new ExecaoTabuleiro("Posição não existe no tabuleiro");
+		}
+		if(peca(posicao) == null) {
+			return null;
+		}else {
+			Peca aux = peca(posicao);
+			aux.posicao = null; //quando uma peça é retirada é atribuido null a posição dela
+			this.pecas[posicao.getLinha()][posicao.getColuna()] = null; //quando uma peça é removida, a sua posição na matriz também recebe null
+			return aux; //retorna  peça que foi retirada
+		}
+	}
+	
+	
 	//Método específica as condições necessários para se existe uma posição no tabuleiro
 	private boolean posicaoExistente(int linha, int coluna) {
 		return linha >= 0 && linha < this.linhas && coluna >= 0 && coluna < this.colunas;

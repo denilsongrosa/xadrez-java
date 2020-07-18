@@ -1,5 +1,6 @@
 package xadrez;
 
+import jogoTabuleiro.Peca;
 import jogoTabuleiro.Posicao;
 import jogoTabuleiro.Tabuleiro;
 import xadrez.pecas.Rei;
@@ -30,11 +31,33 @@ public class PartidaXadrez {
 		return mtz; //retorna a matriz de peças da partida de xadrez
 	}
 	
-	//Método abaixo coloca uma peça na posição da matriz, recebendo a peça na posição do xadrez
-	private void lugarNovaPeca(char coluna, int linha, PecaXadrez peca) {
-		this.tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).getPosicaoMtz());
+	//Classe origem: performChessMove
+	public PecaXadrez moverPeca(PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino) {
+		Posicao origem  = posicaoOrigem.paraPosicaoMtz();
+		Posicao destino = posicaoDestino.paraPosicaoMtz();
+		validarPosicaoOrigem(origem);
+		Peca pecaCapturada = executarMovimento(origem, destino);
+		return (PecaXadrez)pecaCapturada; //é realizado o do dowcasting pois a peça capturada é do tipo Peca
 	}
 	
+	//Classe origem: makeMove
+	private Peca executarMovimento(Posicao origem, Posicao destino) {
+		Peca p = tabuleiro.removePeca(origem); //retira a peça da posicao de origem
+		Peca pecaCapturada = tabuleiro.removePeca(destino); //remove uma peça na posicao destino caso tenha, e a pactura
+		tabuleiro.lugarPeca(p, destino); //coloca a peça que estava na posição de origem na posição de destino]
+		return pecaCapturada; //retorna  peça capturada
+	}
+	
+	private void validarPosicaoOrigem(Posicao posicao) {
+		if (!tabuleiro.existePeca(posicao)) {
+			throw new ExecaoXadrez("Não existe peça na posição de origem");
+		}
+	}
+	
+	//Método abaixo coloca uma peça na posição da matriz, recebendo a peça na posição do xadrez
+	private void lugarNovaPeca(char coluna, int linha, PecaXadrez peca) {
+		this.tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).paraPosicaoMtz());
+	}
 	
 	//método responsável por iniciar a partida de xadrez colocando as peças no tabuleiro
 	private void setupInicial() {
